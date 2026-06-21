@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partenariats - MTL Haitian Food Lovers</title>
+    <style>
+        :root {
+            --primary-color: #0f3066; /* Votre bleu corporatif */
+            --accent-color: #e26137;  /* Votre orange corporatif */
+            --bg-light: #f8f9fa;
+            --text-dark: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+        }
+
+        /* En-tête / Logo Zone */
+        .brand-header {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 6px solid var(--accent-color);
+        }
+
+        .brand-header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .brand-header p {
+            margin: 10px 0 0 0;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Section Lettre */
+        .letter-section {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .letter-section h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* Section Formulaire */
+        .form-section {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(15, 48, 102, 0.1);
+        }
+
+        /* Forfaits / Radio Cards */
+        .partnership-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-card {
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .option-card:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(226, 97, 55, 0.02);
+        }
+
+        .option-card input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .option-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        .option-price {
+            float: right;
+            font-weight: bold;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .option-desc {
+            margin-top: 8px;
+            font-size: 0.95rem;
+            color: #5a626a;
+            padding-left: 24px;
+        }
+
+        /* Boîte de résumé de prix en direct */
+        .live-price-box {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .live-price-box span {
+            font-size: 1.1rem;
+        }
+
+        .live-price-box .amount-display {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-transform: uppercase;
+            margin-top: 20px;
+        }
+
+        .btn-submit:hover {
+            background-color: #c7502a;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. En-tête professionnel -->
+    <header class="brand-header">
+        <h1>MTL Haitian Food Lovers</h1>
+        <p>Espace Partenaires & Croissance Communautaire</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- 2. La Lettre Officielle explicative -->
+        <section class="letter-section">
+            <h2>Nouvelle Étape pour Notre Communauté</h2>
+            <p>Bonjour,</p>
+            <p>Depuis le début, notre groupe Facebook est l'endroit par excellence pour célébrer la gastronomie haïtienne à Montréal. Afin de propulser notre réseau et d'offrir une visibilité moderne à vos établissements, nous migrons officiellement vers <strong>notre tout nouveau site web</strong>.</p>
+            <p>Pour soutenir la gestion, la technique et le marketing de cette vitrine commune, l'intégration à la plateforme est désormais structurée sous forme d'adhésions. Nous avons créé trois formules sur mesure pour respecter et mettre en valeur chaque entreprise selon ses objectifs.</p>
+            <p>Nous vous invitons à remplir le formulaire ci-dessous pour réserver votre place sur le site.</p>
+        </section>
+
+        <!-- 3. Formulaire Interactif -->
+        <section class="form-section">
+            <form id="partnerForm" onsubmit="event.preventDefault(); alert('Merci ! Votre demande a été reçue.');">
+                
+                <div class="form-group">
+                    <label for="clientName">Nom complet du responsable</label>
+                    <input type="text" id="clientName" required placeholder="Ex: Jean Auguste">
+                </div>
+
+                <div class="form-group">
+                    <label for="companyName">Nom de l'entreprise / Restaurant</label>
+                    <input type="text" id="companyName" required placeholder="Ex: Saveurs Kréyol MTL">
+                </div>
+
+                <div class="form-group">
+                    <label>Sélectionnez votre niveau de partenariat</label>
+                    <div class="partnership-options">
+                        
+                        <div class="option-card">
+                            <span class="option-price">1 500 $ / an</span>
+                            <input type="radio" name="package" id="ambassadeur" value="1500" checked onchange="updatePrice()">
+                            <label class="option-title" for="ambassadeur">Partenaire Ambassadeur</label>
+                            <div class="option-desc">Affichage en écran complet dès l'ouverture de la page d'accueil du site. Visibilité maximale et prioritaire sur tout notre réseau.</div>
+                        </div>
+
+                        <div class="option-card">
+                            <span class="option-price">750 $ / an</span>
+                            <input type="radio" name="package" id="privilege" value="750" onchange="updatePrice()">
+                            <label class="option-title" for="privilege">Partenaire Privilège</label>
+                            <div class="option-desc">Idéal pour mettre en avant vos produits. Disposez d'un espace vitrine exclusif sur le site pour afficher vos créations avec des liens de commande directs.</div>
+                        </div>
+
+                        <div class="option-card">
+                            <span class="option-price">350 $ / an</span>
+                            <input type="radio" name="package" id="associe" value="350" onchange="updatePrice()">
+                            <label class="option-title" for="associe">Partenaire Associé</label>
+                            <div class="option-desc">Inclusion officielle de votre commerce dans notre répertoire complet (horaires, logo, contact) pour garder votre présence continue dans le groupe.</div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Commentaires ou spécifications pour vos produits/bannières</label>
+                    <textarea id="comments" rows="3" placeholder="Ajoutez ici vos questions, notes sur vos menus ou préférences de couleurs..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Option de règlement</label>
+                    <div class="partnership-options">
+                        <div class="option-card" style="padding: 15px;">
+                            <input type="radio" name="payment_choice" id="pay_now" value="now" checked onchange="updatePrice()">
+                            <label class="option-title" for="pay_now" style="font-weight: normal;">Régler mon adhésion en ligne dès aujourd'hui</label>
+                        </div>
+                        <div class="option-card" style="padding: 15px;">
+                            <input type="radio" name="payment_choice" id="pay_later" value="later" onchange="updatePrice()">
+                            <label class="option-title" for="pay_later" style="font-weight: normal;">Réserver mon emplacement et payer plus tard (0 $ aujourd'hui)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Zone de Prix Dynamique -->
+                <div class="live-price-box">
+                    <span>Montant dû aujourd'hui :</span>
+                    <div class="amount-display" id="totalAmount">1 500 $</div>
+                </div>
+
+                <button type="submit" class="btn-submit">Valider mon adhésion</button>
+
+            </form>
+        </section>
+
+    </div>
+
+    <!-- Script JavaScript pour le calcul automatique -->
+    <script>
+        function updatePrice() {
+            const packages = document.getElementsByName('package');
+            const paymentChoices = document.getElementsByName('payment_choice');
+            let selectedPrice = 0;
+            let payNow = true;
+
+            // Déterminer le prix du forfait choisi
+            for (const p of packages) {
+                if (p.checked) {
+                    selectedPrice = p.value;
+                    break;
+                }
+            }
+
+            // Déterminer l'option de paiement
+            for (const choice of paymentChoices) {
+                if (choice.checked && choice.value === 'later') {
+                    payNow = false;
+                    break;
+                }
+            }
+
+            // Mettre à jour l'affichage
+            const display = document.getElementById('totalAmount');
+            if (payNow) {
+                display.innerText = selectedPrice + " $";
+                display.style.color = "var(--accent-color)";
+            } else {
+                display.innerText = "0 $";
+                display.style.color = "#2ecc71"; // Vert pour indiquer qu'ils n'ont rien à payer maintenant
+            }
+        }
+    </script>
+</body>
+</html>
