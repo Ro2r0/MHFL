@@ -287,14 +287,18 @@
 
         <h2 class="options-title">Choisissez votre niveau de partenariat</h2>
         
-        <!-- Changement ici : Ajout de la fonction sendEmail() à la soumission -->
-        <form id="partnerForm" onsubmit="sendEmail(event)">
+        <!-- Votre lien unique Formspree ajouté ici -->
+        <form id="partnerForm" action="https://formspree.io/f/xjgqbldz" method="POST">
             
+            <!-- Champs invisibles configurés pour inclure le forfait textuel lisible dans l'email -->
+            <input type="hidden" id="hiddenPackageName" name="Forfait Choisi" value="Ambassadeur">
+            <input type="hidden" id="hiddenPackagePrice" name="Prix du Forfait" value="1 500 $">
+
             <div class="partnership-table">
                 
                 <div class="option-cell selected" onclick="selectCard('ambassadeur')">
                     <div class="radio-header">
-                        <input type="radio" name="package" id="ambassadeur" value="1500" data-name="Ambassadeur" checked onchange="updatePrice()">
+                        <input type="radio" name="package_raw" id="ambassadeur" value="1500" data-name="Ambassadeur" checked onchange="updatePrice()">
                         <label class="option-title" for="ambassadeur">Ambassadeur</label>
                     </div>
                     <span class="option-price">1 500 $ / an</span>
@@ -308,7 +312,7 @@
 
                 <div class="option-cell" onclick="selectCard('privilege')">
                     <div class="radio-header">
-                        <input type="radio" name="package" id="privilege" value="750" data-name="Privilège" onchange="updatePrice()">
+                        <input type="radio" name="package_raw" id="privilege" value="750" data-name="Privilège" onchange="updatePrice()">
                         <label class="option-title" for="privilege">Privilège</label>
                     </div>
                     <span class="option-price">750 $ / an</span>
@@ -322,7 +326,7 @@
 
                 <div class="option-cell" onclick="selectCard('essentiel')">
                     <div class="radio-header">
-                        <input type="radio" name="package" id="essentiel" value="300" data-name="Essentiel" onchange="updatePrice()">
+                        <input type="radio" name="package_raw" id="essentiel" value="300" data-name="Essentiel" onchange="updatePrice()">
                         <label class="option-title" for="essentiel">Essentiel</label>
                     </div>
                     <span class="option-price">300 $ / an</span>
@@ -340,17 +344,17 @@
                 
                 <div class="form-group">
                     <label class="field-label" for="clientName">Nom complet du responsable</label>
-                    <input type="text" id="clientName" required placeholder="Ex: Jean-Baptiste Vital">
+                    <input type="text" id="clientName" name="Nom du responsable" required placeholder="Ex: Jean-Baptiste Vital">
                 </div>
 
                 <div class="form-group">
                     <label class="field-label" for="companyName">Nom de l'entreprise / Restaurant</label>
-                    <input type="text" id="companyName" required placeholder="Ex: Coin Culinaire Haïtien">
+                    <input type="text" id="companyName" name="Nom de l'entreprise" required placeholder="Ex: Coin Culinaire Haïtien">
                 </div>
 
                 <div class="form-group">
                     <label class="field-label" for="comments">Notes ou demandes spéciales</label>
-                    <textarea id="comments" rows="4" placeholder="Indiquez ici vos besoins spécifiques, vos spécialités culinaires ou vos questions..."></textarea>
+                    <textarea id="comments" name="Commentaires" rows="4" placeholder="Indiquez ici vos besoins spécifiques, vos spécialités culinaires ou vos questions..."></textarea>
                 </div>
 
                 <div class="live-price-box">
@@ -365,12 +369,17 @@
 
     <script>
         function updatePrice() {
-            const selectedOption = document.querySelector('input[name="package"]:checked');
+            const selectedOption = document.querySelector('input[name="package_raw"]:checked');
             const totalDisplay = document.getElementById('totalDisplay');
             
             if (selectedOption) {
-                const price = parseInt(selectedOption.value).toLocaleString('fr-CA');
-                totalDisplay.textContent = price + ' $';
+                const priceValue = parseInt(selectedOption.value);
+                const priceFormatted = priceValue.toLocaleString('fr-CA') + ' $';
+                totalDisplay.textContent = priceFormatted;
+
+                // Met à jour les valeurs envoyées à Formspree
+                document.getElementById('hiddenPackageName').value = selectedOption.getAttribute('data-name');
+                document.getElementById('hiddenPackagePrice').value = priceFormatted;
             }
         }
 
@@ -393,45 +402,6 @@
                 selectCard(this.id);
             });
         });
-
-        // Nouvelle fonction pour construire et envoyer le mail au clic
-        function sendEmail(event) {
-            event.preventDefault(); // Empêche le rechargement de la page
-
-            // Récupération des données du formulaire
-            const clientName = document.getElementById('clientName').value;
-            const companyName = document.getElementById('companyName').value;
-            const comments = document.getElementById('comments').value || "Aucune note particulière.";
-            
-            const selectedRadio = document.querySelector('input[name="package"]:checked');
-            const packageName = selectedRadio.getAttribute('data-name');
-            const packagePrice = selectedRadio.value;
-
-            // Configuration des adresses courriel
-            const to = "ro.media.renegade@gmail.com";
-            const cc = "mtlhaitianfoodlovers@gmail.com";
-            
-            // Sujet du courriel
-            const subject = encodeURIComponent(`Nouvelle demande d'adhésion - ${companyName}`);
-            
-            // Corps du texte du courriel
-            let bodyText = `Bonjour,\n\n`;
-            bodyText += `Une nouvelle demande d'adhésion a été soumise via le site web.\n\n`;
-            bodyText += `--- INFORMATIONS DU PARTENAIRE ---\n`;
-            bodyText += `Nom de l'entreprise : ${companyName}\n`;
-            bodyText += `Responsable : ${clientName}\n\n`;
-            bodyText += `--- CHOIX DU FORFAIT ---\n`;
-            bodyText += `Option choisie : ${packageName}\n`;
-            bodyText += `Montant annuel : ${packagePrice} $\n\n`;
-            bodyText += `--- NOTES ET DEMANDES SPÉCIALES ---\n`;
-            bodyText += `${comments}\n\n`;
-            bodyText += `Cordialement.`;
-
-            const body = encodeURIComponent(bodyText);
-
-            // Construction du lien mailto avec CC
-            window.location.href = `mailto:${to}?cc=${cc}&subject=${subject}&body=${body}`;
-        }
     </script>
 </body>
 </html>
