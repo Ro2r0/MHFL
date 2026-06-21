@@ -14,6 +14,7 @@
             --haiti-red: #D21034;    /* Rouge du drapeau haïtien */
             --bg-light: #f7f9fc;
             --text-dark: #1c2a38;
+            --gold-premium: #d4af37; /* Couleur dorée pour le membre fondateur */
         }
 
         body {
@@ -51,7 +52,7 @@
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
         }
@@ -91,7 +92,7 @@
             width: 100%;
             table-layout: fixed;
             border-collapse: separate;
-            border-spacing: 20px 0;
+            border-spacing: 15px 0;
             margin-bottom: 40px;
         }
 
@@ -100,7 +101,7 @@
             background: #ffffff;
             border: 2px solid #e9ecef;
             border-radius: 8px;
-            padding: 30px 25px;
+            padding: 25px 15px;
             vertical-align: top;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -114,9 +115,36 @@
             transform: translateY(-2px);
         }
 
+        /* Style spécial pour la carte Membre Fondateur */
+        .option-cell.founder-card {
+            border-color: var(--gold-premium);
+            background: linear-gradient(180deg, #ffffff 0%, #fffdf6 100%);
+        }
+        
+        .founder-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--gold-premium);
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
         .option-cell.selected {
             border-color: var(--haiti-red);
             background-color: rgba(210, 16, 52, 0.01);
+        }
+        
+        .option-cell.founder-card.selected {
+            border-color: var(--haiti-red);
+            box-shadow: 0 6px 18px rgba(210, 16, 52, 0.15);
         }
 
         .radio-header {
@@ -126,13 +154,13 @@
         .radio-header input[type="radio"] {
             transform: scale(1.3);
             accent-color: var(--haiti-blue);
-            margin-right: 10px;
+            margin-right: 8px;
             vertical-align: middle;
         }
 
         .option-title {
             font-weight: bold;
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             color: var(--haiti-blue);
             vertical-align: middle;
             display: inline-block;
@@ -140,21 +168,25 @@
 
         .option-price {
             display: block;
-            font-size: 1.6rem;
+            font-size: 1.45rem;
             font-weight: bold;
             color: var(--haiti-red);
-            margin: 15px 0;
+            margin: 10px 0;
+        }
+        
+        .option-cell.founder-card .option-price {
+            color: #b38f1d;
         }
 
         .advantages-list {
-            margin: 20px 0 0 0;
-            padding-left: 20px;
+            margin: 15px 0 0 0;
+            padding-left: 18px;
             color: #4a5568;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .advantages-list li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         /* Formulaire */
@@ -284,7 +316,7 @@
         }
 
         /* Comportement adaptatif pour les petits écrans (mobiles) */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .partnership-table, .option-cell {
                 display: block;
                 width: 100%;
@@ -293,7 +325,7 @@
                 border-spacing: 0;
             }
             .option-cell {
-                margin-bottom: 20px;
+                margin-bottom: 25px;
             }
         }
     </style>
@@ -320,50 +352,66 @@
         
         <form id="partnerForm" action="https://formspree.io/f/xjgqbldz" method="POST">
             
-            <!-- Valeurs d'origines initialisées correctement au premier chargement -->
+            <!-- Valeurs d'origines initialisées correctement sur Ambassadeur (900 $) de base -->
             <input type="hidden" id="hiddenPackageName" name="Forfait Choisi" value="Ambassadeur">
-            <input type="hidden" id="hiddenPackagePrice" name="Prix du Forfait" value="1 650 $">
+            <input type="hidden" id="hiddenPackagePrice" name="Prix du Forfait" value="900 $">
 
             <div class="partnership-table">
                 
+                <!-- AMBASSADEUR -->
                 <div class="option-cell selected" onclick="selectCard('ambassadeur')">
                     <div class="radio-header">
-                        <input type="radio" name="package_raw" id="ambassadeur" value="1650" data-name="Ambassadeur" checked onchange="updatePrice()">
+                        <input type="radio" name="package_raw" id="ambassadeur" value="900" data-name="Ambassadeur" checked onchange="updatePrice()">
                         <label class="option-title" for="ambassadeur">Ambassadeur</label>
                     </div>
-                    <span class="option-price">1 650 $ / an</span>
+                    <span class="option-price">900 $ / an</span>
                     <ul class="advantages-list">
-                        <li><strong>Visibilité maximale :</strong> Affichage plein écran dès l'ouverture de la page d'accueil.</li>
-                        <li>Position d'honneur permanente en tête de notre annuaire officiel.</li>
-                        <li>3 publications promotionnelles par mois sur nos réseaux sociaux.</li>
-                        <li>Bannière publicitaire exclusive incluse dans notre newsletter mensuelle.</li>
+                        <li>Page d’accueil</li>
+                        <li>2 publications par mois</li>
+                        <li>Logo vedette</li>
+                        <li>Newsletter</li>
                     </ul>
                 </div>
 
+                <!-- PRIVILÈGE -->
                 <div class="option-cell" onclick="selectCard('privilege')">
                     <div class="radio-header">
-                        <input type="radio" name="package_raw" id="privilege" value="960" data-name="Privilège" onchange="updatePrice()">
+                        <input type="radio" name="package_raw" id="privilege" value="600" data-name="Privilège" onchange="updatePrice()">
                         <label class="option-title" for="privilege">Privilège</label>
                     </div>
-                    <span class="option-price">960 $ / an</span>
+                    <span class="option-price">600 $ / an</span>
                     <ul class="advantages-list">
-                        <li>Mise en avant ciblée dans la section "Meilleures adresses".</li>
-                        <li>Fiche détaillée enrichie (intégration du menu, photos et liens de livraison).</li>
-                        <li>1 publication dédiée par mois sur nos réseaux sociaux.</li>
-                        <li>Badge distinctif visuel "Partenaire Privilège" appliqué sur votre profil.</li>
+                        <li>Fiche complète</li>
+                        <li>1 publication par mois</li>
+                        <li>Badge partenaire</li>
                     </ul>
                 </div>
 
+                <!-- ESSENTIEL -->
                 <div class="option-cell" onclick="selectCard('essentiel')">
                     <div class="radio-header">
-                        <input type="radio" name="package_raw" id="essentiel" value="680" data-name="Essentiel" onchange="updatePrice()">
+                        <input type="radio" name="package_raw" id="essentiel" value="300" data-name="Essentiel" onchange="updatePrice()">
                         <label class="option-title" for="essentiel">Essentiel</label>
                     </div>
-                    <span class="option-price">680 $ / an</span>
+                    <span class="option-price">300 $ / an</span>
                     <ul class="advantages-list">
-                        <li>Présence garantie dans l'annuaire web officiel des restaurants haïtiens.</li>
-                        <li>Inclusion complète des coordonnées de base (adresse, téléphone, horaires).</li>
-                        <li>Lien de redirection direct vers vos plateformes ou réseaux existants.</li>
+                        <li>Présence dans l’annuaire</li>
+                        <li>Coordonnées</li>
+                        <li>Lien vers réseaux sociaux</li>
+                    </ul>
+                </div>
+
+                <!-- MEMBRE FONDATEUR -->
+                <div class="option-cell founder-card" onclick="selectCard('fondateur')">
+                    <div class="founder-badge">Offre limitée aux 20 premiers</div>
+                    <div class="radio-header">
+                        <input type="radio" name="package_raw" id="fondateur" value="500" data-name="Membre Fondateur" onchange="updatePrice()">
+                        <label class="option-title" for="fondateur" style="color: #8a6d1c;">Membre Fondateur</label>
+                    </div>
+                    <span class="option-price">500 $ / an</span>
+                    <ul class="advantages-list">
+                        <li><strong>Statut exclusif historique</strong></li>
+                        <li>Avantages premium réservés aux premiers soutiens du réseau</li>
                     </ul>
                 </div>
 
@@ -408,7 +456,7 @@
 
                 <div class="live-price-box">
                     <span>Montant de votre adhésion annuelle :</span>
-                    <div class="amount-display" id="totalDisplay">1 650 $</div>
+                    <div class="amount-display" id="totalDisplay">900 $</div>
                 </div>
 
                 <button type="submit" class="btn-submit">Soumettre ma demande d'adhésion</button>
