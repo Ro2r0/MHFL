@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Partenariats - MTL Haitian Food Lovers</title>
     <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         :root {
             --haiti-blue: #00209F;   /* Bleu du drapeau haïtien */
             --haiti-red: #D21034;    /* Rouge du drapeau haïtien */
@@ -47,7 +51,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1100px;
             margin: 40px auto;
             padding: 0 20px;
         }
@@ -58,14 +62,99 @@
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             border-top: 4px solid var(--haiti-blue);
         }
 
-        .letter-section h2 {
+        .letter-section h1 {
+            font-size: 1.8rem;
             color: var(--haiti-blue);
             margin-top: 0;
+        }
+
+        .letter-section h2 {
+            color: var(--haiti-red);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        /* Section des cartes d'options alignées */
+        .options-title {
+            text-align: center;
+            color: var(--haiti-blue);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        .partnership-table {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: separate;
+            border-spacing: 20px 0;
+            margin-bottom: 40px;
+        }
+
+        .option-cell {
+            display: table-cell;
+            background: #ffffff;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 30px 25px;
+            vertical-align: top;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .option-cell:hover {
+            border-color: var(--haiti-blue);
+            box-shadow: 0 6px 18px rgba(0, 32, 159, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .option-cell.selected {
+            border-color: var(--haiti-red);
+            background-color: rgba(210, 16, 52, 0.01);
+        }
+
+        .radio-header {
+            margin-bottom: 15px;
+        }
+
+        .radio-header input[type="radio"] {
+            transform: scale(1.3);
+            accent-color: var(--haiti-blue);
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .option-title {
+            font-weight: bold;
+            font-size: 1.25rem;
+            color: var(--haiti-blue);
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        .option-price {
+            display: block;
             font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--haiti-red);
+            margin: 15px 0;
+        }
+
+        .advantages-list {
+            margin: 20px 0 0 0;
+            padding-left: 20px;
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+
+        .advantages-list li {
+            margin-bottom: 10px;
         }
 
         /* Formulaire */
@@ -77,11 +166,20 @@
             border-top: 4px solid var(--haiti-red);
         }
 
+        .form-section h2 {
+            color: var(--haiti-blue);
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+            border-bottom: 2px solid #f1f3f5;
+            padding-bottom: 10px;
+        }
+
         .form-group {
             margin-bottom: 25px;
         }
 
-        label {
+        label.field-label {
             display: block;
             font-weight: 600;
             margin-bottom: 8px;
@@ -103,54 +201,6 @@
             box-shadow: 0 0 0 3px rgba(0, 32, 159, 0.1);
         }
 
-        /* Cartes de choix */
-        .partnership-options {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .option-card {
-            border: 2px solid #e9ecef;
-            border-radius: 6px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
-            background: #fff;
-        }
-
-        .option-card:hover {
-            border-color: var(--haiti-blue);
-            background-color: rgba(0, 32, 159, 0.01);
-        }
-
-        .option-card input[type="radio"] {
-            margin-right: 12px;
-            transform: scale(1.2);
-            accent-color: var(--haiti-blue);
-        }
-
-        .option-title {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: var(--haiti-blue);
-        }
-
-        .option-price {
-            float: right;
-            font-weight: bold;
-            color: var(--haiti-red);
-            font-size: 1.2rem;
-        }
-
-        .option-desc {
-            margin-top: 8px;
-            font-size: 0.95rem;
-            color: #5a626a;
-            padding-left: 28px;
-        }
-
         /* Boîte de prix total */
         .live-price-box {
             background-color: var(--haiti-blue);
@@ -158,15 +208,15 @@
             padding: 20px;
             border-radius: 6px;
             margin-top: 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            text-align: right;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .live-price-box span {
             font-size: 1.1rem;
             font-weight: 500;
+            margin-right: 15px;
+            vertical-align: middle;
         }
 
         .live-price-box .amount-display {
@@ -174,8 +224,10 @@
             font-weight: bold;
             color: #ffffff;
             background: var(--haiti-red);
-            padding: 5px 15px;
+            padding: 5px 20px;
             border-radius: 4px;
+            display: inline-block;
+            vertical-align: middle;
         }
 
         /* Bouton Soumettre */
@@ -199,6 +251,20 @@
         .btn-submit:hover {
             background-color: #b00d2a;
         }
+
+        /* Comportement adaptatif pour les petits écrans (mobiles) */
+        @media (max-width: 768px) {
+            .partnership-table, .option-cell {
+                display: block;
+                width: 100%;
+            }
+            .partnership-table {
+                border-spacing: 0;
+            }
+            .option-cell {
+                margin-bottom: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -214,39 +280,120 @@
             <h1>Évolution de notre communauté et nouvelles opportunités de partenariat</h1>
             <h2>Propulsons notre culture culinaire ensemble</h2>
             <p>Bonjour chers partenaires et précieux collaborateurs,</p>
-            <p>Notre communauté Facebook est devenue le point de rassemblement incontournable pour les amoureux 
-                de la cuisine haïtienne à Montréal. Pour offrir une vitrine d'envergure et professionnelle à vos 
-                établissements, nous créons <strong>notre tout nouveau site web officiel Montreal Haitian Food Lovers</strong>.</p>
-            <p>Depuis son lancement, le groupe MTL Haitian Food Lovers est devenu une référence incontournable pour célébrer, 
-                découvrir et faire rayonner la richesse de la gastronomie haïtienne à Montréal. Si notre communauté est aujourd'hui 
-                si vibrante, c'est en grande partie grâce à votre engagement, à votre passion et à la qualité de vos produits 
-                et services.</p>
-            <p>Afin d'assurer le succès, la maintenance et la promotion de cette plateforme, d'offrir une visibilité maximale à 
-                nos acteurs locaux et de centraliser nos activités, l'intégration et le maintien au sein de notre réseau est désormais 
-                structurée sous forme d'adhésions annuelles. Afin de répondre aux besoins de chacun, nous vous proposons trois formules 
-                conçues pour respecter et valoriser chaque entreprise.</p>
-            <p>Merci de compléter le formulaire ci-dessous pour réserver votre place sur le site.</p>
+            <p>Notre communauté Facebook est devenue le point de rassemblement incontournable pour les amoureux de la cuisine haïtienne à Montréal. Pour offrir une vitrine d'envergure et professionnelle à vos établissements, nous créons <strong>notre tout nouveau site web officiel Montreal Haitian Food Lovers</strong>.</p>
+            <p>Depuis son lancement, le groupe MTL Haitian Food Lovers est devenu une référence incontournable pour célébrer, découvrir et faire rayonner la richesse de la gastronomie haïtienne à Montréal. Si notre communauté est aujourd'hui si vibrante, c'est en grande partie grâce à votre engagement, à votre passion et à la qualité de vos produits et services.</p>
+            <p>Afin d'assurer le succès, la maintenance et la promotion de cette plateforme, d'offrir une visibilité maximale à nos acteurs locaux et de centraliser nos activités, l'intégration et le maintien au sein de notre réseau est désormais structurée sous forme d'adhésions annuelles.</p>
         </section>
 
-        <section class="form-section">
-            <form id="partnerForm" onsubmit="event.preventDefault(); alert('Formulaire soumis avec succès !');">
+        <h2 class="options-title">Choisissez votre niveau de partenariat</h2>
+        
+        <form id="partnerForm" onsubmit="event.preventDefault(); alert('Formulaire soumis avec succès !');">
+            
+            <div class="partnership-table">
+                
+                <div class="option-cell selected" onclick="selectCard('ambassadeur')">
+                    <div class="radio-header">
+                        <input type="radio" name="package" id="ambassadeur" value="1500" checked onchange="updatePrice()">
+                        <label class="option-title" for="ambassadeur">Ambassadeur</label>
+                    </div>
+                    <span class="option-price">1 500 $ / an</span>
+                    <ul class="advantages-list">
+                        <li><strong>Visibilité maximale :</strong> Affichage plein écran dès l'ouverture de la page d'accueil.</li>
+                        <li>Position d'honneur permanente en tête de notre annuaire officiel.</li>
+                        <li>3 publications promotionnelles par mois sur nos réseaux sociaux.</li>
+                        <li>Bannière publicitaire exclusive incluse dans notre newsletter mensuelle.</li>
+                    </ul>
+                </div>
+
+                <div class="option-cell" onclick="selectCard('privilege')">
+                    <div class="radio-header">
+                        <input type="radio" name="package" id="privilege" value="750" onchange="updatePrice()">
+                        <label class="option-title" for="privilege">Privilège</label>
+                    </div>
+                    <span class="option-price">750 $ / an</span>
+                    <ul class="advantages-list">
+                        <li>Mise en avant ciblée dans la section "Meilleures adresses".</li>
+                        <li>Fiche détaillée enrichie (intégration du menu, photos et liens de livraison).</li>
+                        <li>1 publication dédiée par mois sur nos réseaux sociaux.</li>
+                        <li>Badge distinctif visuel "Partenaire Privilège" appliqué sur votre profil.</li>
+                    </ul>
+                </div>
+
+                <div class="option-cell" onclick="selectCard('essentiel')">
+                    <div class="radio-header">
+                        <input type="radio" name="package" id="essentiel" value="300" onchange="updatePrice()">
+                        <label class="option-title" for="essentiel">Essentiel</label>
+                    </div>
+                    <span class="option-price">300 $ / an</span>
+                    <ul class="advantages-list">
+                        <li>Présence garantie dans l'annuaire web officiel des restaurants haïtiens.</li>
+                        <li>Inclusion complète des coordonnées de base (adresse, téléphone, horaires).</li>
+                        <li>Lien de redirection direct vers vos plateformes ou réseaux existants.</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <section class="form-section">
+                <h2>Formulaire d'inscription</h2>
                 
                 <div class="form-group">
-                    <label for="clientName">Nom complet du responsable</label>
-                    <input type="text" id="clientName" required placeholder="Ex: Garçon ou Fille du pays">
+                    <label class="field-label" for="clientName">Nom complet du responsable</label>
+                    <input type="text" id="clientName" required placeholder="Ex: Jean-Baptiste Vital">
                 </div>
 
                 <div class="form-group">
-                    <label for="companyName">Nom de l'entreprise / Restaurant</label>
+                    <label class="field-label" for="companyName">Nom de l'entreprise / Restaurant</label>
                     <input type="text" id="companyName" required placeholder="Ex: Coin Culinaire Haïtien">
                 </div>
 
                 <div class="form-group">
-                    <label>Votre niveau de partenariat</label>
-                    <div class="partnership-options">
-                        
-                        <div class="option-card">
-                            <span class="option-price">1 500 $ / an</span>
-                            <input type="radio" name="package" id="ambassadeur" value="1500" checked onchange="updatePrice()">
-                            <label class="option-title" for="ambassadeur">Partenaire Ambassadeur</label>
-                            <div class="option-desc">Affichage plein écran dès l'ouverture de la première page du site web. Position d'honneur et visibilité maximale
+                    <label class="field-label" for="comments">Notes ou demandes spéciales</label>
+                    <textarea id="comments" rows="4" placeholder="Indiquez ici vos besoins spécifiques, vos spécialités culinaires ou vos questions..."></textarea>
+                </div>
+
+                <div class="live-price-box">
+                    <span>Montant de votre adhésion annuelle :</span>
+                    <div class="amount-display" id="totalDisplay">1 500 $</div>
+                </div>
+
+                <button type="submit" class="btn-submit">Soumettre ma demande d'adhésion</button>
+            </section>
+        </form>
+    </div>
+
+    <script>
+        function updatePrice() {
+            const selectedOption = document.querySelector('input[name="package"]:checked');
+            const totalDisplay = document.getElementById('totalDisplay');
+            
+            if (selectedOption) {
+                const price = parseInt(selectedOption.value).toLocaleString('fr-CA');
+                totalDisplay.textContent = price + ' $';
+            }
+        }
+
+        function selectCard(id) {
+            const radio = document.getElementById(id);
+            if (radio) {
+                radio.checked = true;
+                updatePrice();
+            }
+
+            // Gère l'effet de bordure active (rouge) sur la boîte sélectionnée
+            document.querySelectorAll('.option-cell').forEach(cell => {
+                cell.classList.remove('selected');
+            });
+            radio.closest('.option-cell').classList.add('selected');
+        }
+
+        // Évite les conflits d'événements de clic natifs sur le bouton radio lui-même
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('click', function(e) {
+                e.stopPropagation();
+                selectCard(this.id);
+            });
+        });
+    </script>
+</body>
+</html>
