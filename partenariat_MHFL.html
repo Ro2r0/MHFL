@@ -211,6 +211,15 @@
             margin-bottom: 25px;
         }
 
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
         label.field-label {
             display: block;
             font-weight: 600;
@@ -218,7 +227,7 @@
             color: var(--haiti-blue);
         }
 
-        input[type="text"], textarea {
+        input[type="text"], input[type="email"], input[type="tel"], textarea {
             width: 100%;
             padding: 12px;
             border: 1px solid #ced4da;
@@ -227,7 +236,7 @@
             font-size: 1rem;
         }
 
-        input[type="text"]:focus, textarea:focus {
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus {
             outline: none;
             border-color: var(--haiti-blue);
             box-shadow: 0 0 0 3px rgba(0, 32, 159, 0.1);
@@ -327,6 +336,10 @@
             .option-cell {
                 margin-bottom: 25px;
             }
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
         }
     </style>
 </head>
@@ -350,15 +363,13 @@
 
         <h2 class="options-title">Choisissez votre niveau de partenariat</h2>
         
-        <form id="partnerForm" action="https://formspree.io/f/xjgqbldz" method="POST">
+        <form id="partnerForm" action="https://formspree.io/f/mrewzvjz" method="POST">
             
-            <!-- Valeurs d'origines initialisées correctement sur Ambassadeur (900 $) de base -->
-            <input type="hidden" id="hiddenPackageName" name="Forfait Choisi" value="Ambassadeur">
-            <input type="hidden" id="hiddenPackagePrice" name="Prix du Forfait" value="900 $">
+            <input type="hidden" id="hiddenPackageName" name="forfait_choisi" value="Ambassadeur">
+            <input type="hidden" id="hiddenPackagePrice" name="prix_du_forfait" value="900 $">
 
             <div class="partnership-table">
                 
-                <!-- AMBASSADEUR -->
                 <div class="option-cell selected" onclick="selectCard('ambassadeur')">
                     <div class="radio-header">
                         <input type="radio" name="package_raw" id="ambassadeur" value="900" data-name="Ambassadeur" checked onchange="updatePrice()">
@@ -373,7 +384,6 @@
                     </ul>
                 </div>
 
-                <!-- PRIVILÈGE -->
                 <div class="option-cell" onclick="selectCard('privilege')">
                     <div class="radio-header">
                         <input type="radio" name="package_raw" id="privilege" value="600" data-name="Privilège" onchange="updatePrice()">
@@ -387,7 +397,6 @@
                     </ul>
                 </div>
 
-                <!-- ESSENTIEL -->
                 <div class="option-cell" onclick="selectCard('essentiel')">
                     <div class="radio-header">
                         <input type="radio" name="package_raw" id="essentiel" value="300" data-name="Essentiel" onchange="updatePrice()">
@@ -401,7 +410,6 @@
                     </ul>
                 </div>
 
-                <!-- MEMBRE FONDATEUR -->
                 <div class="option-cell founder-card" onclick="selectCard('fondateur')">
                     <div class="founder-badge">Offre limitée aux 10 premiers</div>
                     <div class="radio-header">
@@ -421,33 +429,40 @@
                 <h2>Formulaire d'inscription</h2>
                 
                 <div class="form-group">
-                    <label class="field-label" for="clientName">Nom complet du responsable</label>
-                    <input type="text" id="clientName" name="Nom du responsable" 
-                        required placeholder="Ex: Jesula Jean-Baptiste">
+                    <label class="field-label" for="clientName">Nom complet du responsable *</label>
+                    <input type="text" id="clientName" name="nom_responsable" required placeholder="Ex: Jesula Jean-Baptiste">
                 </div>
 
                 <div class="form-group">
-                    <label class="field-label" for="companyName">Nom de l'entreprise / Restaurant</label>
-                    <input type="text" id="companyName" name="Nom de l'entreprise" 
-                        required placeholder="Ex: Mache Gran Nèg">
+                    <label class="field-label" for="companyName">Nom de l'entreprise / Restaurant *</label>
+                    <input type="text" id="companyName" name="nom_entreprise" required placeholder="Ex: Mache Gran Nèg">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="field-label" for="clientEmail">Adresse courriel *</label>
+                        <input type="email" id="clientEmail" name="email" required placeholder="Ex: contact@restaurant.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="field-label" for="clientPhone">Numéro de téléphone *</label>
+                        <input type="tel" id="clientPhone" name="telephone" required placeholder="Ex: 514-123-4567">
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label class="field-label" for="comments">Notes ou demandes spéciales</label>
-                    <textarea id="comments" name="Commentaires" rows="4" 
-                        placeholder="Indiquez ici vos commentaires, vos questions, les descriptions de votre entreprise..."></textarea>
+                    <textarea id="comments" name="commentaires" rows="4" placeholder="Indiquez ici vos commentaires, vos questions, les descriptions de votre entreprise..."></textarea>
                 </div>
 
-                <!-- Section Option de Paiement Obligatoire -->
                 <div class="form-group">
                     <label class="field-label">Préférence de règlement *</label>
                     <div class="payment-options-container">
                         <label class="payment-radio-group">
-                            <input type="radio" name="Option de paiement" value="Paiement complet" required>
+                            <input type="radio" name="option_paiement" value="Paiement complet" required>
                             <span>Je souhaite effectuer le paiement complet</span>
                         </label>
                         <label class="payment-radio-group">
-                            <input type="radio" name="Option de paiement" value="Attendre de faire le paiement" required>
+                            <input type="radio" name="option_paiement" value="Attendre de faire le paiement" required>
                             <span>Je souhaite communiquer avec vous avant le paiement</span>
                         </label>
                     </div>
@@ -488,7 +503,9 @@
             document.querySelectorAll('.option-cell').forEach(cell => {
                 cell.classList.remove('selected');
             });
-            radio.closest('.option-cell').classList.add('selected');
+            if (radio) {
+                radio.closest('.option-cell').classList.add('selected');
+            }
         }
 
         document.querySelectorAll('input[name="package_raw"]').forEach(radio => {
