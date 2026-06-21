@@ -201,6 +201,37 @@
             box-shadow: 0 0 0 3px rgba(0, 32, 159, 0.1);
         }
 
+        /* Styles spécifiques pour les options de paiement obligatoire */
+        .payment-options-container {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px dashed #ced4da;
+        }
+
+        .payment-radio-group {
+            display: block;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .payment-radio-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .payment-radio-group input[type="radio"] {
+            transform: scale(1.2);
+            accent-color: var(--haiti-red);
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .payment-radio-group span {
+            font-size: 1rem;
+            color: var(--text-dark);
+            vertical-align: middle;
+        }
+
         /* Boîte de prix total */
         .live-price-box {
             background-color: var(--haiti-blue);
@@ -287,10 +318,8 @@
 
         <h2 class="options-title">Choisissez votre niveau de partenariat</h2>
         
-        <!-- Votre lien unique Formspree ajouté ici -->
         <form id="partnerForm" action="https://formspree.io/f/xjgqbldz" method="POST">
             
-            <!-- Champs invisibles configurés pour inclure le forfait textuel lisible dans l'email -->
             <input type="hidden" id="hiddenPackageName" name="Forfait Choisi" value="Ambassadeur">
             <input type="hidden" id="hiddenPackagePrice" name="Prix du Forfait" value="1 500 $">
 
@@ -357,6 +386,25 @@
                     <textarea id="comments" name="Commentaires" rows="4" placeholder="Indiquez ici vos besoins spécifiques, vos spécialités culinaires ou vos questions..."></textarea>
                 </div>
 
+                <!-- NOUVELLE SECTION OBLIGATOIRE : Option de Paiement -->
+                <div class="form-group">
+                    <label class="field-label">Préférence de règlement *</label>
+                    <div class="payment-options-container">
+                        <label class="payment-radio-group">
+                            <input type="radio" name="Option de paiement" value="Paiement complet" required>
+                            <span>Je souhaite effectuer le paiement complet</span>
+                        </label>
+                        <label class="payment-radio-group">
+                            <input type="radio" name="Option de paiement" value="Paiement partiel" required>
+                            <span>Je souhaite effectuer un paiement partiel (entente de versements)</span>
+                        </label>
+                        <label class="payment-radio-group">
+                            <input type="radio" name="Option de paiement" value="Attendre de faire le paiement" required>
+                            <span>Je préfère attendre avant de faire le paiement (me faire contacter)</span>
+                        </label>
+                    </div>
+                </div>
+
                 <div class="live-price-box">
                     <span>Montant de votre adhésion annuelle :</span>
                     <div class="amount-display" id="totalDisplay">1 500 $</div>
@@ -377,7 +425,6 @@
                 const priceFormatted = priceValue.toLocaleString('fr-CA') + ' $';
                 totalDisplay.textContent = priceFormatted;
 
-                // Met à jour les valeurs envoyées à Formspree
                 document.getElementById('hiddenPackageName').value = selectedOption.getAttribute('data-name');
                 document.getElementById('hiddenPackagePrice').value = priceFormatted;
             }
@@ -396,7 +443,7 @@
             radio.closest('.option-cell').classList.add('selected');
         }
 
-        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        document.querySelectorAll('input[name="package_raw"]').forEach(radio => {
             radio.addEventListener('click', function(e) {
                 e.stopPropagation();
                 selectCard(this.id);
